@@ -220,8 +220,36 @@ def build_senado(conn):
 
     conn.row_factory = sqlite3.Row
     sens_todos = [dict(r) for r in conn.execute("SELECT * FROM legisladores_senado")]
-    sens = [s for s in sens_todos if mandato_vigente(s.get("mandato_inicio"), s.get("mandato_fin"))]
-    print(f"legisladores_senado: {len(sens_todos)} filas totales, {len(sens)} con mandato vigente hoy ({HOY})")
+    sens_vigentes = [s for s in sens_todos if mandato_vigente(s.get("mandato_inicio"), s.get("mandato_fin"))]
+
+    # Puede pasar que la misma persona aparezca más de una vez entre los
+    # "vigentes" (por ejemplo, si cambió de bloque a mitad de mandato, o si
+    # algún mandato_fin viene vacío o con formato de fecha distinto). Nos
+    # quedamos con un solo registro por persona, usando senador_id como
+    # clave (más confiable que el nombre, que a veces viene con formato
+    # distinto entre registros de la misma persona).
+    mejor_por_persona = {}
+    for s in sens_vigentes:
+        clave = s.get("senador_id") or s.get("nombre_norm") or ""
+        actual = mejor_por_persona.get(clave)
+        inicio = s.get("mandato_inicio") or ""
+        if actual is None or inicio > (actual.get("mandato_inicio") or ""):
+            mejor_por_persona[clave] = s
+    sens = list(mejor_por_persona.values())
+
+    print(f"legisladores_senado: {len(sens_todos)} filas totales, {len(sens_vigentes)} con mandato vigente hoy "
+          f"({HOY}), {len(sens)} tras eliminar duplicados por persona")
+
+    # Diagnóstico: si dos personas distintas en 'sens' tienen el mismo nombre
+    # normalizado, probablemente sigue habiendo un duplicado real (con
+    # distinto senador_id) que esta deduplicación no atrapó.
+    nombres_vistos = {}
+    for s in sens:
+        nn = s.get("nombre_norm") or ""
+        nombres_vistos.setdefault(nn, []).append(s.get("senador_id"))
+    for nn, ids in nombres_vistos.items():
+        if len(ids) > 1:
+            print(f"  AVISO: nombre duplicado tras dedupe: '{nn}' con senador_id = {ids}")
 
     sesiones_raw = {r["acta_id"]: dict(r) for r in conn.execute("SELECT * FROM sesiones_senado")}
     votos_raw = [dict(r) for r in conn.execute("SELECT * FROM votos_senado")]
