@@ -50,6 +50,13 @@ DECISIONES DE DISEÑO (importantes, leer antes de confiar ciegamente en los dato
    cruzar por nombre de autor contra el dataset de expedientes (best-effort,
    puede fallar si el nombre no está escrito exactamente igual).
 
+5. MANDATO VIGENTE: en Senado, el ETL trae mandato_inicio/mandato_fin
+   (periodoLegal de la API de ArgentinaDatos), así que se filtra a solo
+   los senadores cuyo mandato cubre la fecha de hoy. En Diputados, el
+   dataset oficial usado como "Composición actual de la Cámara" NO trae
+   fechas de mandato, así que por ahora no se puede filtrar de la misma
+   manera (pendiente, ver conversación con Claude).
+
 Uso:
     python etl_diputados.py
     python etl_senado.py
@@ -61,10 +68,13 @@ import re
 import sqlite3
 import unicodedata
 from collections import defaultdict
+from datetime import date
 from pathlib import Path
 
 DB_PATH = Path("control_ciudadano.db")
 OUT_PATH = Path("control-ciudadano-app/public/data/legisladores.json")
+
+HOY = date.today().isoformat()  # "YYYY-MM-DD", comparable como string con fechas ISO
 
 VOTO_MAP = {
     "AFIRMATIVO": "afirmativo", "AFIRMATIVA": "afirmativo", "SI": "afirmativo",
@@ -96,6 +106,19 @@ def normalize_nombre(valor) -> str:
         return ""
     norm = unicodedata.normalize("NFKD", valor).encode("ascii", "ignore").decode()
     return " ".join(re.sub(r"[^A-Za-z ]", " ", norm.upper()).split())
+
+
+def mandato_vigente(inicio, fin) -> bool:
+    """True si, a la fecha de hoy, el mandato está vigente. Se compara como
+    string porque las fechas vienen en formato ISO (YYYY-MM-DD), que ordena
+    igual alfabéticamente que cronológicamente."""
+    if not inicio:
+        return False  # sin fecha de inicio, no podemos confirmar que ya asumió
+    if isinstance(inicio, str) and inicio > HOY:
+        return False  # todavía no asumió
+    if fin and isinstance(fin, str) and fin < HOY:
+        return False  # el mandato ya terminó
+    return True
 
 
 def table_exists(conn, name: str) -> bool:
@@ -196,7 +219,10 @@ def build_senado(conn):
         return [], [], []
 
     conn.row_factory = sqlite3.Row
-    sens = [dict(r) for r in conn.execute("SELECT * FROM legisladores_senado")]
+    sens_todos = [dict(r) for r in conn.execute("SELECT * FROM legisladores_senado")]
+    sens = [s for s in sens_todos if mandato_vigente(s.get("mandato_inicio"), s.get("mandato_fin"))]
+    print(f"legisladores_senado: {len(sens_todos)} filas totales, {len(sens)} con mandato vigente hoy ({HOY})")
+
     sesiones_raw = {r["acta_id"]: dict(r) for r in conn.execute("SELECT * FROM sesiones_senado")}
     votos_raw = [dict(r) for r in conn.execute("SELECT * FROM votos_senado")]
 
