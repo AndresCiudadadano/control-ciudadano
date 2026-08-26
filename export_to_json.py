@@ -129,86 +129,48 @@ def table_exists(conn, name: str) -> bool:
 
 def build_diputados(conn):
     """Devuelve (legisladores[], sesiones[], votaciones[]) para Diputados.
-    Listas vacías si el ETL de Diputados no corrió todavía."""
+    Listas vacías si el ETL de Diputados no corrió todavía.
+
+    NOTA: el dataset de votos de HCDN usado acá solo cubre 2011-2018 (ver
+    docstring del módulo, punto 5) — no corresponde al Congreso actual, así
+    que no se usa para calcular asistencia. Por eso esta función no necesita
+    procesar votos/sesiones/proyectos históricos: devuelve el roster de 257
+    diputados actuales (sin asistencia) y listas globales vacías."""
     if not table_exists(conn, "legisladores"):
         print("AVISO: faltan tablas de Diputados — corré etl_diputados.py primero.")
         return [], [], []
 
     conn.row_factory = sqlite3.Row
     legs = [dict(r) for r in conn.execute("SELECT * FROM legisladores WHERE camara='diputados'")]
-    sesiones_raw = {r["acta_id"]: dict(r) for r in conn.execute("SELECT * FROM sesiones")}
-    votos_raw = [dict(r) for r in conn.execute("SELECT * FROM votos")]
-    proyectos_raw = [dict(r) for r in conn.execute("SELECT * FROM proyectos")] if table_exists(conn, "proyectos") else []
-
-    # Agrupar actas en "reuniones" (periodo+reunion) para la asistencia
-    reunion_de_acta = {}
-    for acta_id, s in sesiones_raw.items():
-        reunion_de_acta[acta_id] = f"dip-r{s.get('periodo')}-{s.get('reunion')}"
-
-    reuniones_meta = {}  # reunion_key -> {fecha, tipo}
-    for acta_id, s in sesiones_raw.items():
-        rk = reunion_de_acta[acta_id]
-        fecha = s.get("fecha") or ""
-        if rk not in reuniones_meta or fecha < (reuniones_meta[rk]["fecha"] or ""):
-            reuniones_meta[rk] = {"fecha": s.get("fecha"), "tipo": s.get("tipo_sesion")}
-
-    votaciones = [
-        {"id": f"dip-{acta_id}", "titulo": s.get("titulo") or f"Acta {acta_id}", "fecha": s.get("fecha")}
-        for acta_id, s in sesiones_raw.items()
-    ]
-    sesiones = [
-        {"id": rk, "fecha": meta["fecha"], "tipo": meta["tipo"]}
-        for rk, meta in reuniones_meta.items()
-    ]
-
-    votos_por_persona = defaultdict(list)
-    for v in votos_raw:
-        votos_por_persona[v["persona_id"]].append(v)
-
-    # Proyectos: cruce best-effort por nombre de autor
-    proyectos_por_autor_norm = defaultdict(list)
-    for p in proyectos_raw:
-        autor_norm = normalize_nombre(p.get("autor"))
-        if autor_norm and p.get("titulo"):
-            proyectos_por_autor_norm[autor_norm].append(p["titulo"])
 
     legisladores = []
     for leg in legs:
-        persona_id = leg["persona_id"]
-        mis_votos = votos_por_persona.get(persona_id, [])
-
-        votos_dict = {}
-        reunion_estado = {}  # reunion_key -> True si presente en al menos un acta
-        for v in mis_votos:
-            acta_id = v["acta_id"]
-            estado = normalize_voto(v.get("voto"))
-            votos_dict[f"dip-{acta_id}"] = estado
-            rk = reunion_de_acta.get(acta_id)
-            if rk:
-                reunion_estado[rk] = reunion_estado.get(rk, False) or (estado != "ausente")
-
-        sesiones_dict = {rk: ("presente" if presente else "ausente") for rk, presente in reunion_estado.items()}
-        presentes = sum(1 for v in sesiones_dict.values() if v == "presente")
-        total = len(sesiones_dict)
-
-        nombre_norm = normalize_nombre(leg.get("nombre"))
-        proyectos = proyectos_por_autor_norm.get(nombre_norm, [])
-
+        # IMPORTANTE: el dataset de votos de Diputados usado acá (HCDN,
+        # "per. 129-137") solo cubre sesiones de 2011 a 2018 — HCDN todavía
+        # no publicó los períodos 141-143 (2023-2026, el Congreso actual) en
+        # su portal de datos abiertos. Por eso NO calculamos una "asistencia"
+        # con estos votos: sería del período equivocado y engañosa para el
+        # legislador actual. Se deja en null hasta encontrar una fuente con
+        # datos del período vigente. Ver conversación con Claude para más
+        # detalle y cómo revertir esto si HCDN actualiza el dataset.
         legisladores.append({
-            "id": f"dip-{persona_id}",
+            "id": f"dip-{leg['persona_id']}",
             "nombre": leg.get("nombre"),
             "camara": "Diputados",
+            "tipo": "nacional",
+            "cargo": "Diputado/a Nacional",
+            "mandatoPeriodo": leg.get("mandato_periodo"),
             "provinciaId": leg.get("provincia_slug") or "desconocida",
             "bloque": leg.get("bloque_actual"),
-            "asistencia": round(100 * presentes / total) if total else 0,
-            "presentesCount": presentes,
-            "ausentesCount": total - presentes,
-            "sesiones": sesiones_dict,
-            "votos": votos_dict,
-            "proyectos": proyectos,
+            "asistencia": None,
+            "presentesCount": None,
+            "ausentesCount": None,
+            "sesiones": {},
+            "votos": {},
+            "proyectos": [],
         })
 
-    return legisladores, sesiones, votaciones
+    return legisladores, [], []
 
 
 def build_senado(conn):
@@ -285,10 +247,18 @@ def build_senado(conn):
         presentes = sum(1 for v in sesiones_dict.values() if v == "presente")
         total = len(sesiones_dict)
 
+        # Período de mandato como texto legible, ej. "2021-2027"
+        anio_inicio = (sen.get("mandato_inicio") or "")[:4]
+        anio_fin = (sen.get("mandato_fin") or "")[:4]
+        mandato_periodo = f"{anio_inicio}-{anio_fin}" if anio_inicio and anio_fin else None
+
         legisladores.append({
             "id": f"sen-{sen.get('senador_id')}",
             "nombre": sen.get("nombre"),
             "camara": "Senado",
+            "tipo": "nacional",
+            "cargo": "Senador/a Nacional",
+            "mandatoPeriodo": mandato_periodo,
             "provinciaId": sen.get("provincia_slug") or "desconocida",
             "bloque": sen.get("bloque") or sen.get("partido"),
             "asistencia": round(100 * presentes / total) if total else 0,

@@ -197,9 +197,15 @@ function useLegislativeData() {
 }
 
 function asistenciaColor(pct) {
+  if (pct === null || pct === undefined) return TOKENS.line;
   if (pct >= 85) return TOKENS.afirmativo;
   if (pct >= 65) return TOKENS.abstencion;
   return TOKENS.negativo;
+}
+
+function cargoLabel(leg) {
+  if (leg.cargo) return leg.cargo;
+  return leg.camara === "Diputados" ? "Diputado/a Nacional" : "Senador/a Nacional";
 }
 
 function votoColor(voto) {
@@ -221,22 +227,26 @@ function votoLabel(voto) {
 }
 
 function RingGauge({ pct, size = 64, stroke = 6 }) {
+  const sinDato = pct === null || pct === undefined;
   const r = (size - stroke) / 2;
   const c = 2 * Math.PI * r;
-  const offset = c - (pct / 100) * c;
+  const offset = sinDato ? c : c - (pct / 100) * c;
   return (
     <svg width={size} height={size} viewBox={`0 0 ${size} ${size}`}>
       <circle cx={size / 2} cy={size / 2} r={r} fill="none" stroke={TOKENS.line} strokeWidth={stroke} />
-      <circle
-        cx={size / 2} cy={size / 2} r={r} fill="none"
-        stroke={asistenciaColor(pct)} strokeWidth={stroke} strokeLinecap="round"
-        strokeDasharray={c} strokeDashoffset={offset}
-        transform={`rotate(-90 ${size / 2} ${size / 2})`}
-        style={{ transition: "stroke-dashoffset 0.6s ease" }}
-      />
+      {!sinDato && (
+        <circle
+          cx={size / 2} cy={size / 2} r={r} fill="none"
+          stroke={asistenciaColor(pct)} strokeWidth={stroke} strokeLinecap="round"
+          strokeDasharray={c} strokeDashoffset={offset}
+          transform={`rotate(-90 ${size / 2} ${size / 2})`}
+          style={{ transition: "stroke-dashoffset 0.6s ease" }}
+        />
+      )}
       <text x="50%" y="52%" textAnchor="middle" dominantBaseline="middle"
-        fontFamily="'IBM Plex Mono', monospace" fontSize={size * 0.24} fill={TOKENS.textPrimary} fontWeight="600">
-        {pct}%
+        fontFamily="'IBM Plex Mono', monospace" fontSize={sinDato ? size * 0.16 : size * 0.24}
+        fill={sinDato ? TOKENS.textMuted : TOKENS.textPrimary} fontWeight="600">
+        {sinDato ? "S/D" : `${pct}%`}
       </text>
     </svg>
   );
@@ -307,7 +317,7 @@ export default function ControlCiudadano() {
                   strokeLinejoin="round"
                   tabIndex={0}
                   role="button"
-                  aria-label={`${prov.name}${leg ? `, asistencia ${leg.asistencia}%` : ""}`}
+                  aria-label={`${prov.name}${leg && leg.asistencia != null ? `, asistencia ${leg.asistencia}%` : ""}`}
                   onClick={() => { setSelectedProvince(prov.id); setSelectedLegislator(null); }}
                   onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { setSelectedProvince(prov.id); setSelectedLegislator(null); } }}
                 />
@@ -327,7 +337,7 @@ export default function ControlCiudadano() {
                   strokeWidth={isSelected ? 2 : 1}
                   tabIndex={0}
                   role="button"
-                  aria-label={`CABA${leg ? `, asistencia ${leg.asistencia}%` : ""}`}
+                  aria-label={`CABA${leg && leg.asistencia != null ? `, asistencia ${leg.asistencia}%` : ""}`}
                   onClick={() => { setSelectedProvince("caba"); setSelectedLegislator(null); }}
                   onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { setSelectedProvince("caba"); setSelectedLegislator(null); } }}
                 />
@@ -352,7 +362,7 @@ export default function ControlCiudadano() {
           )}
 
           {selectedProvince && !selectedLegislator && (
-            <div>
+            <div key={selectedProvince}>
               <h2 style={styles.provinceTitle}>
                 {PROVINCES.find((p) => p.id === selectedProvince)?.name}
               </h2>
@@ -374,7 +384,7 @@ export default function ControlCiudadano() {
                     <div style={{ flex: 1, minWidth: 0 }}>
                       <div style={styles.legName}>{leg.nombre}</div>
                       <div style={styles.legMeta}>
-                        <span style={styles.badge}>{leg.camara}</span>
+                        <span style={styles.badge}>{cargoLabel(leg)}</span>
                         <span style={styles.metaText}>{leg.bloque}</span>
                       </div>
                     </div>
@@ -395,7 +405,7 @@ export default function ControlCiudadano() {
             const sesionesDeLegislador = SESIONES.filter((s) => leg.sesiones[s.id] !== undefined);
             const votacionesDeLegislador = VOTACIONES.filter((v) => leg.votos[v.id] !== undefined);
             return (
-              <div>
+              <div key={selectedLegislator}>
                 <button style={styles.backBtn} onClick={() => setSelectedLegislator(null)}>← Volver</button>
 
                 <div style={styles.detailHeader}>
@@ -403,13 +413,22 @@ export default function ControlCiudadano() {
                   <div>
                     <div style={styles.detailName}>{leg.nombre}</div>
                     <div style={styles.legMeta}>
-                      <span style={styles.badge}>{leg.camara}</span>
+                      <span style={styles.badge}>{cargoLabel(leg)}</span>
                       <span style={styles.metaText}>{leg.bloque} · {PROVINCES.find(p => p.id === leg.provinciaId)?.name}</span>
+                      {leg.mandatoPeriodo && (
+                        <span style={styles.metaText}>· Mandato {leg.mandatoPeriodo}</span>
+                      )}
                     </div>
                   </div>
                 </div>
 
                 <div style={styles.sectionLabel}>Asistencia a sesiones</div>
+                {leg.asistencia === null || leg.asistencia === undefined ? (
+                  <p style={styles.emptyText}>
+                    Todavía no hay datos de votaciones disponibles para este período en la fuente oficial (HCDN).
+                  </p>
+                ) : (
+                <>
                 <div style={styles.attendanceSummary}>
                   <SummaryStat value={sesionesDeLegislador.length} label="Sesiones" color={TOKENS.textPrimary} />
                   <SummaryStat value={leg.presentesCount} label="Presente" color={TOKENS.afirmativo} />
@@ -432,6 +451,8 @@ export default function ControlCiudadano() {
                     );
                   })}
                 </div>
+                </>
+                )}
 
                 <div style={styles.sectionLabel}>Votos recientes</div>
                 <div style={styles.votesList}>

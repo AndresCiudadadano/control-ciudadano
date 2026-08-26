@@ -26,6 +26,7 @@ import pandas as pd
 import requests
 
 BASE_URL = "https://datos.hcdn.gob.ar/api/3/action/datastore_search"
+RESOURCE_SHOW_URL = "https://datos.hcdn.gob.ar/api/3/action/resource_show"
 DB_PATH = Path("control_ciudadano.db")
 RAW_DIR = Path("data_raw")
 RAW_DIR.mkdir(exist_ok=True)
@@ -44,8 +45,65 @@ RESOURCES = {
 PAGE_SIZE = 5000
 
 
+def fetch_resource_direct_download(name: str, resource_id: str, debug: bool = False) -> pd.DataFrame:
+    """Respaldo: cuando datastore_search no está activado para un resource
+    (CKAN devuelve 404), se consulta resource_show para obtener la URL real
+    del archivo (CSV o XLSX) y se descarga/parsea directo con pandas."""
+    print(f"[{name}] el datastore no está activado para este resource — "
+          f"probando descarga directa del archivo...")
+    resp = requests.get(RESOURCE_SHOW_URL, params={"id": resource_id}, timeout=60)
+    resp.raise_for_status()
+    payload = resp.json()
+    if not payload.get("success"):
+        raise RuntimeError(f"[{name}] resource_show también falló: {payload}")
+
+    file_url = payload["result"]["url"]
+    fmt = (payload["result"].get("format") or "").upper()
+    print(f"[{name}] descargando archivo directo: {file_url} (formato: {fmt or 'desconocido'})")
+
+    if file_url.lower().endswith((".xlsx", ".xls")) or fmt in ("XLSX", "XLS"):
+        df = pd.read_excel(file_url)
+    elif file_url.lower().endswith(".json") or fmt == "JSON":
+        # El archivo puede traer un BOM al principio: decodificar con utf-8-sig
+        raw_bytes = requests.get(file_url, timeout=120).content
+        raw = json.loads(raw_bytes.decode("utf-8-sig"))
+        if isinstance(raw, list):
+            df = pd.DataFrame(raw)
+        elif isinstance(raw, dict):
+            df = None
+            for key in ("data", "records", "result", "rows", "fields"):
+                if key in raw and isinstance(raw[key], list):
+                    df = pd.DataFrame(raw[key])
+                    break
+            if df is None and raw and all(isinstance(v, dict) for v in raw.values()):
+                # Formato real observado en HCDN: {"1": {...fila...}, "2": {...fila...}, ...}
+                # (diccionario numerado en vez de lista) — usar los valores como filas.
+                df = pd.DataFrame(list(raw.values()))
+            if df is None:
+                if debug:
+                    print(f"[{name}] AVISO: estructura JSON no reconocida, claves de primer nivel: {list(raw.keys())}")
+                df = pd.DataFrame(raw)
+        else:
+            raise RuntimeError(f"[{name}] estructura JSON inesperada en {file_url}")
+        # Algunos campos vienen con un BOM incrustado en el propio nombre (ej. "\ufeffacta_id")
+        df.columns = [str(c).replace("\ufeff", "") for c in df.columns]
+    else:
+        # Probar con separadores/encodings comunes en datasets del Estado argentino
+        try:
+            df = pd.read_csv(file_url, sep=None, engine="python", encoding="utf-8")
+        except UnicodeDecodeError:
+            df = pd.read_csv(file_url, sep=None, engine="python", encoding="latin-1")
+
+    if debug:
+        print(f"[{name}] columnas reales (vía descarga directa): {list(df.columns)}")
+    print(f"[{name}] {len(df)} filas descargadas directo del archivo.")
+    return df
+
+
 def fetch_resource(name: str, resource_id: str, debug: bool = False) -> pd.DataFrame:
-    """Descarga un resource completo de CKAN, paginando de a PAGE_SIZE filas."""
+    """Descarga un resource completo de CKAN, paginando de a PAGE_SIZE filas.
+    Si el datastore_search no está activado para ese resource (404), cae
+    automáticamente a descargar el archivo directo (ver fetch_resource_direct_download)."""
     cache_file = RAW_DIR / f"{name}.csv"
     if cache_file.exists():
         print(f"[{name}] usando caché en {cache_file}")
@@ -57,6 +115,15 @@ def fetch_resource(name: str, resource_id: str, debug: bool = False) -> pd.DataF
     while True:
         params = {"resource_id": resource_id, "limit": PAGE_SIZE, "offset": offset}
         resp = requests.get(BASE_URL, params=params, timeout=60)
+
+        if resp.status_code == 404:
+            # Este resource no tiene datastore activo: usar el respaldo de
+            # descarga directa y devolver acá mismo (se cachea igual abajo).
+            df = fetch_resource_direct_download(name, resource_id, debug=debug)
+            df.to_csv(cache_file, index=False)
+            print(f"[{name}] guardado {len(df)} filas en {cache_file}")
+            return df
+
         resp.raise_for_status()
         payload = resp.json()
 
@@ -127,38 +194,192 @@ def build_database(dfs: dict, debug: bool = False):
     col_nombre = find_col(df_leg, "nombre", "apellido_nombre", "diputado")
     col_provincia = find_col(df_leg, "provincia", "distrito")
     col_bloque = find_col(df_leg, "bloque")
-    col_mandato_inicio = find_col(df_leg, "fecha_inicio", "inicio_mandato", "mandato_inicio")
-    col_mandato_fin = find_col(df_leg, "fecha_fin", "fin_mandato", "mandato_fin")
+    col_apellido = find_col(df_leg, "apellido")
+    col_mandato = find_col(df_leg, "mandato")
+    col_fecha_inicio_real = find_col(df_leg, "fecha_de_inicio", "fecha_inicio")
 
     if debug:
-        print("legisladores -> persona:", col_persona, "| nombre:", col_nombre,
-              "| provincia:", col_provincia, "| bloque:", col_bloque)
+        print("legisladores (listado oficial) -> apellido:", col_apellido, "| nombre:", col_nombre,
+              "| provincia:", col_provincia, "| bloque:", col_bloque,
+              "(este listado no trae persona_id — se usa solo para enriquecer mandato/fecha)")
 
-    out_leg = pd.DataFrame({
-        "persona_id": df_leg[col_persona] if col_persona else None,
-        "nombre": df_leg[col_nombre] if col_nombre else None,
-        "camara": "diputados",
-        "provincia_raw": df_leg[col_provincia] if col_provincia else None,
-        "bloque_actual": df_leg[col_bloque] if col_bloque else None,
-        "mandato_inicio": df_leg[col_mandato_inicio] if col_mandato_inicio else None,
-        "mandato_fin": df_leg[col_mandato_fin] if col_mandato_fin else None,
+    # El listado oficial de HCDN no tiene persona_id, así que no se puede usar
+    # como tabla principal de legisladores. En cambio, se arma la tabla de
+    # legisladores a partir de votos_detalle (que sí trae persona_id en cada
+    # voto) y se enriquece con fecha de mandato del listado oficial cruzando
+    # por nombre normalizado (best-effort).
+    import re as _re
+    import unicodedata as _ud
+    def _norm_nombre(v):
+        if not isinstance(v, str):
+            return ""
+        n = _ud.normalize("NFKD", v).encode("ascii", "ignore").decode()
+        n = _re.sub(r"[^A-Za-z ]", " ", n.upper())
+        return " ".join(n.split())
+
+    mandato_por_nombre = {}
+    if col_apellido and col_nombre:
+        for _, fila in df_leg.iterrows():
+            clave = _norm_nombre(f"{fila[col_apellido]} {fila[col_nombre]}")
+            mandato_por_nombre[clave] = {
+                "mandato": fila[col_mandato] if col_mandato else None,
+                "fecha_inicio": fila[col_fecha_inicio_real] if col_fecha_inicio_real else None,
+            }
+
+    # --- votaciones: detalle (voto por legislador) — se procesa antes que
+    # "legisladores" porque de acá sale el persona_id real ---
+    df_det = dfs["votos_detalle"]
+    col_acta_d = find_col(df_det, "acta_id", "actaid")
+    col_persona_d = find_col(df_det, "persona_id", "personaid")
+    col_diputado_d = find_col(df_det, "diputado", "nombre")
+    col_bloque_d = find_col(df_det, "bloque")
+    col_provincia_d = find_col(df_det, "provincia", "distrito")
+    col_voto = find_col(df_det, "voto")
+
+    if debug:
+        print("detalle -> acta:", col_acta_d, "| persona:", col_persona_d, "| voto:", col_voto)
+
+    out_votos = pd.DataFrame({
+        "acta_id": df_det[col_acta_d] if col_acta_d else None,
+        "persona_id": df_det[col_persona_d] if col_persona_d else None,
+        "diputado": df_det[col_diputado_d] if col_diputado_d else None,
+        "bloque": df_det[col_bloque_d] if col_bloque_d else None,
+        "provincia_raw": df_det[col_provincia_d] if col_provincia_d else None,
+        "voto": df_det[col_voto] if col_voto else None,
     })
-    out_leg["provincia_slug"] = out_leg["provincia_raw"].apply(slugify_provincia)
+    out_votos["provincia_slug"] = out_votos["provincia_raw"].apply(slugify_provincia)
+
+    # Verificar si persona_id realmente sirve como clave (a veces HCDN lo deja
+    # vacío para la mayoría de las filas). Si no sirve, usamos el nombre
+    # normalizado del diputado como identificador de respaldo.
+    con_persona_id = out_votos["persona_id"].astype(str).str.strip()
+    proporcion_con_id = (con_persona_id != "").mean() if len(out_votos) else 0
+    if debug:
+        print(f"votos: proporción de filas con persona_id no vacío: {proporcion_con_id:.1%}")
+
+    if proporcion_con_id < 0.5:
+        print("AVISO: persona_id viene vacío en la mayoría de los votos — "
+              "se usa el nombre normalizado del diputado como identificador en su lugar.")
+        out_votos["persona_id"] = out_votos["diputado"].apply(lambda v: "nom:" + _norm_nombre(v))
+
+    out_votos.to_sql("votos", conn, if_exists="replace", index=False)
+    print(f"votos: {len(out_votos)} filas")
+
+    # IMPORTANTE: la base de "legisladores" es el LISTADO OFICIAL de la
+    # Composición actual de la Cámara (df_leg, ~257 filas) — NO los votos.
+    # Los votos cubren varios períodos históricos (129-137), así que usarlos
+    # como base traía diputados que ya no están en su banca. Acá se cruza
+    # cada diputado oficial actual con sus votos históricos (por nombre
+    # normalizado) solo para poder calcular su asistencia.
+    def _tokens(nombre_norm: str):
+        return tuple(nombre_norm.split())
+
+    votos_validos = out_votos.dropna(subset=["persona_id"])
+    votos_validos = votos_validos[votos_validos["persona_id"].astype(str).str.strip() != ""]
+    votos_validos = votos_validos.copy()
+    votos_validos["nombre_norm"] = votos_validos["diputado"].apply(_norm_nombre)
+
+    # Índice: para cada nombre único en los votos, probamos varias longitudes
+    # de "apellido" (1 a 3 palabras) tanto AL PRINCIPIO como AL FINAL del
+    # nombre (por si el formato es "Apellido Nombre" o "Nombre Apellido"),
+    # y guardamos el resto de palabras junto al persona_id.
+    from collections import defaultdict as _defaultdict
+    indice_por_apellido = _defaultdict(list)  # apellido_tuple -> [(resto_tuple, persona_id)]
+    nombres_unicos_votos = votos_validos.drop_duplicates(subset=["nombre_norm"])
+    for _, fila_v in nombres_unicos_votos.iterrows():
+        tokens = _tokens(fila_v["nombre_norm"])
+        for n in range(1, min(3, len(tokens)) + 1):
+            indice_por_apellido[tokens[:n]].append((tokens[n:], fila_v["persona_id"]))   # apellido al principio
+            if len(tokens) > n:
+                indice_por_apellido[tokens[-n:]].append((tokens[:-n], fila_v["persona_id"]))  # apellido al final
+
+    if not col_apellido or not col_nombre:
+        print("ERROR: no se pudo leer el listado oficial de diputados (faltan columnas "
+              "de apellido/nombre). Revisar con --debug las columnas reales de 'legisladores'.")
+
+    filas_leg = []
+    sin_votos_matcheados = 0
+    nombres_sin_match_reales = []  # rastreado durante el bucle, no reconstruido después
+    for _, fila in df_leg.iterrows():
+        nombre_completo = f"{fila[col_apellido]} {fila[col_nombre]}" if col_apellido and col_nombre else fila.get(col_nombre)
+        clave = _norm_nombre(nombre_completo)
+        extra = mandato_por_nombre.get(clave, {})
+
+        apellido_tokens = _tokens(_norm_nombre(fila[col_apellido])) if col_apellido else tuple()
+        nombre_pila_tokens = set(_tokens(_norm_nombre(fila[col_nombre]))) if col_nombre else set()
+        candidatos = indice_por_apellido.get(apellido_tokens, [])
+        persona_id = None
+        if candidatos:
+            # Si hay más de una persona con ese mismo apellido en los votos,
+            # nos quedamos con la que más coincide en nombre de pila.
+            resto, pid = max(candidatos, key=lambda c: len(set(c[0]) & nombre_pila_tokens))
+            persona_id = pid
+        if persona_id is None:
+            persona_id = "nom:" + clave
+            sin_votos_matcheados += 1
+            nombres_sin_match_reales.append(nombre_completo)
+        filas_leg.append({
+            "persona_id": persona_id,
+            "nombre": nombre_completo,
+            "camara": "diputados",
+            "provincia_raw": fila[col_provincia] if col_provincia else None,
+            "provincia_slug": slugify_provincia(fila[col_provincia] if col_provincia else None),
+            "bloque_actual": fila[col_bloque] if col_bloque else None,
+            "mandato_periodo": extra.get("mandato"),  # ej. "2025-2029"
+            "mandato_inicio": extra.get("fecha_inicio"),
+            "mandato_fin": None,
+        })
+    out_leg = pd.DataFrame(filas_leg)
+    if out_leg.empty:
+        out_leg = pd.DataFrame(columns=["persona_id", "nombre", "camara", "provincia_raw",
+                                         "provincia_slug", "bloque_actual", "mandato_periodo",
+                                         "mandato_inicio", "mandato_fin"])
     out_leg.to_sql("legisladores", conn, if_exists="replace", index=False)
-    print(f"legisladores: {len(out_leg)} filas")
+    print(f"legisladores: {len(out_leg)} filas (del listado OFICIAL de composición actual de la Cámara; "
+          f"{sin_votos_matcheados} de ellos no matchearon con ningún voto histórico por nombre)")
+
+    if sin_votos_matcheados:
+        # Diagnóstico más fino: para una muestra de los que no matchearon,
+        # buscamos si su apellido aparece como PALABRA COMPLETA (no como
+        # substring de texto, que daba falsos positivos: "ALI" aparece
+        # dentro de "ITALIA" sin ser el mismo apellido) en algún nombre de
+        # los votos, y mostramos ese nombre real para ver la diferencia.
+        nombre_por_token = _defaultdict(list)  # token -> [nombre_norm, ...] (nombres que contienen ese token)
+        for nn in nombres_unicos_votos["nombre_norm"]:
+            for tok in set(nn.split()):
+                nombre_por_token[tok].append(nn)
+
+        print(f"  Diagnóstico de los primeros 8 sin match (reales):")
+        for nombre_completo in nombres_sin_match_reales[:8]:
+            apellido_buscado = nombre_completo.split()[0].upper()
+            import unicodedata as _ud2
+            apellido_norm_buscado = _ud2.normalize("NFKD", apellido_buscado).encode("ascii", "ignore").decode()
+            coincidencias = nombre_por_token.get(apellido_norm_buscado, [])
+            if coincidencias:
+                print(f"    '{nombre_completo}' -> apellido '{apellido_norm_buscado}' SÍ aparece como palabra "
+                      f"en votos, ej.: {coincidencias[:2]}")
+            else:
+                print(f"    '{nombre_completo}' -> apellido '{apellido_norm_buscado}' NO aparece como palabra "
+                      f"en ningún voto (probablemente sin votos registrados aún)")
+
+
+
+
+
+
 
     # --- votaciones: cabecera (sesiones) ---
     df_cab = dfs["votos_cabecera"]
     col_acta = find_col(df_cab, "acta_id", "actaid")
-    col_periodo = find_col(df_cab, "periodo")
+    col_periodo = find_col(df_cab, "nroperiodo", "periodo")
     col_reunion = find_col(df_cab, "reunion")
     col_sesion = find_col(df_cab, "sesion")
     col_tipo_sesion = find_col(df_cab, "tipo_sesion", "tiposesion")
     col_fecha = find_col(df_cab, "fecha")
     col_titulo = find_col(df_cab, "titulo", "asunto")
     col_resultado = find_col(df_cab, "resultado")
-    col_afirm = find_col(df_cab, "afirmativos", "votos_afirmativos")
-    col_negat = find_col(df_cab, "negativos", "votos_negativos")
+    col_afirm = find_col(df_cab, "votos_afirmativos", "afirmativos")
+    col_negat = find_col(df_cab, "votos_negativos", "negativos")
     col_absten = find_col(df_cab, "abstenciones")
     col_ausentes = find_col(df_cab, "ausentes")
 
@@ -181,30 +402,6 @@ def build_database(dfs: dict, debug: bool = False):
     })
     out_ses.to_sql("sesiones", conn, if_exists="replace", index=False)
     print(f"sesiones: {len(out_ses)} filas")
-
-    # --- votaciones: detalle (voto por legislador) ---
-    df_det = dfs["votos_detalle"]
-    col_acta_d = find_col(df_det, "acta_id", "actaid")
-    col_persona_d = find_col(df_det, "persona_id", "personaid")
-    col_diputado_d = find_col(df_det, "diputado", "nombre")
-    col_bloque_d = find_col(df_det, "bloque")
-    col_provincia_d = find_col(df_det, "provincia", "distrito")
-    col_voto = find_col(df_det, "voto")
-
-    if debug:
-        print("detalle -> acta:", col_acta_d, "| persona:", col_persona_d, "| voto:", col_voto)
-
-    out_votos = pd.DataFrame({
-        "acta_id": df_det[col_acta_d] if col_acta_d else None,
-        "persona_id": df_det[col_persona_d] if col_persona_d else None,
-        "diputado": df_det[col_diputado_d] if col_diputado_d else None,
-        "bloque": df_det[col_bloque_d] if col_bloque_d else None,
-        "provincia_raw": df_det[col_provincia_d] if col_provincia_d else None,
-        "voto": df_det[col_voto] if col_voto else None,
-    })
-    out_votos["provincia_slug"] = out_votos["provincia_raw"].apply(slugify_provincia)
-    out_votos.to_sql("votos", conn, if_exists="replace", index=False)
-    print(f"votos: {len(out_votos)} filas")
 
     # --- expedientes (proyectos) ---
     df_exp = dfs["expedientes"]
