@@ -269,22 +269,39 @@ def build_senado(conn):
     for sen in sens:
         nombre_norm = sen["nombre_norm"]
         mis_votos = votos_por_nombre.get(nombre_norm, [])
+        mandato_inicio = sen.get("mandato_inicio") or ""
+        mandato_fin = sen.get("mandato_fin") or ""
 
         votos_dict = {}
         sesiones_dict = {}
+        fuera_de_mandato = 0
         for v in mis_votos:
             acta_id = v["acta_id"]
+            fecha_acta = (sesiones_raw.get(acta_id) or {}).get("fecha") or ""
+            # Solo contar votos de actas dentro del mandato ACTUAL de este
+            # senador — si fue reelecto o hay coincidencia de nombre con
+            # otra persona, esto evita sumar sesiones de un período distinto.
+            if fecha_acta and mandato_inicio and fecha_acta < mandato_inicio:
+                fuera_de_mandato += 1
+                continue
+            if fecha_acta and mandato_fin and fecha_acta > mandato_fin:
+                fuera_de_mandato += 1
+                continue
             estado = normalize_voto(v.get("voto"))
             key = f"sen-{acta_id}"
             votos_dict[key] = estado
             sesiones_dict[key] = "presente" if estado != "ausente" else "ausente"
 
+        if fuera_de_mandato:
+            print(f"  {sen.get('nombre')}: {fuera_de_mandato} votos fuera de su mandato "
+                  f"({mandato_inicio} a {mandato_fin}) descartados")
+
         presentes = sum(1 for v in sesiones_dict.values() if v == "presente")
         total = len(sesiones_dict)
 
         # Período de mandato como texto legible, ej. "2021-2027"
-        anio_inicio = (sen.get("mandato_inicio") or "")[:4]
-        anio_fin = (sen.get("mandato_fin") or "")[:4]
+        anio_inicio = mandato_inicio[:4]
+        anio_fin = mandato_fin[:4]
         mandato_periodo = f"{anio_inicio}-{anio_fin}" if anio_inicio and anio_fin else None
 
         legisladores.append({
@@ -296,9 +313,9 @@ def build_senado(conn):
             "mandatoPeriodo": mandato_periodo,
             "provinciaId": sen.get("provincia_slug") or "desconocida",
             "bloque": sen.get("bloque") or sen.get("partido"),
-            "asistencia": round(100 * presentes / total) if total else 0,
-            "presentesCount": presentes,
-            "ausentesCount": total - presentes,
+            "asistencia": round(100 * presentes / total) if total else None,
+            "presentesCount": presentes if total else None,
+            "ausentesCount": (total - presentes) if total else None,
             "sesiones": sesiones_dict,
             "votos": votos_dict,
             "proyectos": [],  # no disponible en la fuente usada, ver docstring
@@ -328,7 +345,8 @@ def main():
         json.dump(salida, f, ensure_ascii=False, indent=2)
 
     print(f"Listo: {OUT_PATH}")
-    print(f"  Diputados: {len(leg_dip)} legisladores, {len(ses_dip)} sesiones, {len(vot_dip)} votaciones")
+    print(f"  Diputados: {len(leg_dip)} legisladores, {len(vot_dip)} votos históricos con fecha "
+          f"(sin cálculo de asistencia — ver nota en el docstring del módulo)")
     print(f"  Senado:    {len(leg_sen)} legisladores, {len(ses_sen)} sesiones, {len(vot_sen)} votaciones")
     if not leg_dip:
         print("  -> falta correr etl_diputados.py")
