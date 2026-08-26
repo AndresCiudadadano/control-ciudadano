@@ -456,7 +456,14 @@ export default function ControlCiudadano() {
                 </>
                 )}
 
-                <div style={styles.sectionLabel}>Votos recientes</div>
+                <div style={styles.sectionLabel}>
+                  {leg.camara === "Diputados" ? "Votos registrados (con fecha)" : "Votos recientes"}
+                </div>
+                {leg.camara === "Diputados" && votacionesDeLegislador.length > 0 && (
+                  <p style={{ ...styles.emptyText, marginBottom: 10 }}>
+                    La fuente disponible solo cubre sesiones de 2011 a 2018 — estos votos pueden ser de un período de mandato anterior de este legislador, no necesariamente del actual.
+                  </p>
+                )}
                 <div style={styles.votesList}>
                   {votacionesDeLegislador.map((v) => (
                     <div key={v.id} style={styles.voteRow}>
@@ -476,12 +483,19 @@ export default function ControlCiudadano() {
                   Proyectos presentados {leg.proyectos.length > 0 ? `(${leg.proyectos.length})` : ""}
                 </div>
                 {leg.proyectos.length === 0 ? (
-                  <p style={styles.emptyText}>Sin proyectos de ejemplo cargados.</p>
+                  <p style={styles.emptyText}>No se encontraron proyectos presentados por este legislador en la fuente disponible.</p>
                 ) : (
                   <ul style={styles.projectList}>
-                    {leg.proyectos.map((p, i) => (
-                      <li key={i} style={styles.projectItem}>{p}</li>
-                    ))}
+                    {leg.proyectos.map((p, i) => {
+                      const titulo = typeof p === "string" ? p : p.titulo;
+                      const fecha = typeof p === "string" ? null : p.fecha;
+                      return (
+                        <li key={i} style={styles.projectItem}>
+                          {titulo}
+                          {fecha && <span style={{ color: TOKENS.textMuted, fontSize: 12 }}> — {fecha}</span>}
+                        </li>
+                      );
+                    })}
                   </ul>
                 )}
               </div>

@@ -12,12 +12,12 @@ genera legisladores.json en el formato EXACTO que espera src/App.jsx:
       "camara": "Diputados" | "Senado",
       "provinciaId": "<slug igual al id usado en PROVINCES dentro de App.jsx>",
       "bloque": "...",
-      "asistencia": 0-100,                  // % redondeado
-      "presentesCount": N,
-      "ausentesCount": N,
+      "asistencia": 0-100 | null,           // % redondeado; null si no hay datos confiables del período actual
+      "presentesCount": N | null,
+      "ausentesCount": N | null,
       "sesiones": { "<sesionId>": "presente" | "ausente", ... },
       "votos": { "<votacionId>": "afirmativo"|"negativo"|"abstencion"|"ausente", ... },
-      "proyectos": ["Título del proyecto", ...]   // best-effort, ver aviso abajo
+      "proyectos": [{"titulo": "...", "fecha": "..."}, ...]   // best-effort, ver aviso abajo
     }, ...
   ],
   "votaciones": [ { "id": "...", "titulo": "...", "fecha": "..." }, ... ],
@@ -54,8 +54,19 @@ DECISIONES DE DISEÑO (importantes, leer antes de confiar ciegamente en los dato
    (periodoLegal de la API de ArgentinaDatos), así que se filtra a solo
    los senadores cuyo mandato cubre la fecha de hoy. En Diputados, el
    dataset oficial usado como "Composición actual de la Cámara" NO trae
-   fechas de mandato, así que por ahora no se puede filtrar de la misma
-   manera (pendiente, ver conversación con Claude).
+   fechas de mandato, así que se usa directamente el listado de 257
+   diputados que ya representa la composición vigente.
+
+6. ASISTENCIA DE DIPUTADOS: el dataset de votos de HCDN usado acá
+   ("per. 129-137") solo cubre sesiones de 2011 a 2018 — no corresponde al
+   Congreso actual. Por eso NO se calcula un "% de asistencia" con estos
+   votos (sería del período equivocado y engañoso). Sin embargo, si un
+   diputado actual votó específicamente en esas sesiones viejas (por
+   haber estado en el cargo en un período anterior), esos votos y
+   proyectos SÍ se muestran individualmente, cada uno con su fecha
+   visible — a diferencia de un porcentaje resumido, un voto puntual con
+   fecha no es engañoso: el usuario puede ver que es historial, no del
+   período actual.
 
 Uso:
     python etl_diputados.py
@@ -131,30 +142,54 @@ def build_diputados(conn):
     """Devuelve (legisladores[], sesiones[], votaciones[]) para Diputados.
     Listas vacías si el ETL de Diputados no corrió todavía.
 
-    NOTA: el dataset de votos de HCDN usado acá solo cubre 2011-2018 (ver
-    docstring del módulo, punto 5) — no corresponde al Congreso actual, así
-    que no se usa para calcular asistencia. Por eso esta función no necesita
-    procesar votos/sesiones/proyectos históricos: devuelve el roster de 257
-    diputados actuales (sin asistencia) y listas globales vacías."""
+    NOTA sobre asistencia: el dataset de votos de HCDN usado acá solo
+    cubre 2011-2018 (ver docstring del módulo, puntos 5-6) — no corresponde
+    al Congreso actual, así que NO se calcula un "% de asistencia" (sería
+    engañoso). Pero si un diputado actual ya votó en esas sesiones viejas
+    (por haber estado en el cargo en un período anterior), sus votos y
+    proyectos puntuales SÍ se muestran, cada uno con su fecha real — un
+    dato con fecha visible no es engañoso, a diferencia de un resumen %."""
     if not table_exists(conn, "legisladores"):
         print("AVISO: faltan tablas de Diputados — corré etl_diputados.py primero.")
         return [], [], []
 
     conn.row_factory = sqlite3.Row
     legs = [dict(r) for r in conn.execute("SELECT * FROM legisladores WHERE camara='diputados'")]
+    sesiones_raw = {r["acta_id"]: dict(r) for r in conn.execute("SELECT * FROM sesiones")}
+    votos_raw = [dict(r) for r in conn.execute("SELECT * FROM votos")]
+    proyectos_raw = [dict(r) for r in conn.execute("SELECT * FROM proyectos")] if table_exists(conn, "proyectos") else []
+
+    votaciones = [
+        {"id": f"dip-{acta_id}", "titulo": s.get("titulo") or f"Acta {acta_id}", "fecha": s.get("fecha")}
+        for acta_id, s in sesiones_raw.items()
+    ]
+
+    votos_por_persona = defaultdict(list)
+    for v in votos_raw:
+        votos_por_persona[v["persona_id"]].append(v)
+
+    # Proyectos: cruce best-effort por nombre de autor, guardando también la fecha
+    proyectos_por_autor_norm = defaultdict(list)
+    for p in proyectos_raw:
+        autor_norm = normalize_nombre(p.get("autor"))
+        if autor_norm and p.get("titulo"):
+            proyectos_por_autor_norm[autor_norm].append({"titulo": p["titulo"], "fecha": p.get("fecha")})
 
     legisladores = []
     for leg in legs:
-        # IMPORTANTE: el dataset de votos de Diputados usado acá (HCDN,
-        # "per. 129-137") solo cubre sesiones de 2011 a 2018 — HCDN todavía
-        # no publicó los períodos 141-143 (2023-2026, el Congreso actual) en
-        # su portal de datos abiertos. Por eso NO calculamos una "asistencia"
-        # con estos votos: sería del período equivocado y engañosa para el
-        # legislador actual. Se deja en null hasta encontrar una fuente con
-        # datos del período vigente. Ver conversación con Claude para más
-        # detalle y cómo revertir esto si HCDN actualiza el dataset.
+        persona_id = leg["persona_id"]
+        mis_votos = votos_por_persona.get(persona_id, [])
+
+        votos_dict = {}
+        for v in mis_votos:
+            acta_id = v["acta_id"]
+            votos_dict[f"dip-{acta_id}"] = normalize_voto(v.get("voto"))
+
+        nombre_norm = normalize_nombre(leg.get("nombre"))
+        proyectos = proyectos_por_autor_norm.get(nombre_norm, [])
+
         legisladores.append({
-            "id": f"dip-{leg['persona_id']}",
+            "id": f"dip-{persona_id}",
             "nombre": leg.get("nombre"),
             "camara": "Diputados",
             "tipo": "nacional",
@@ -165,12 +200,12 @@ def build_diputados(conn):
             "asistencia": None,
             "presentesCount": None,
             "ausentesCount": None,
-            "sesiones": {},
-            "votos": {},
-            "proyectos": [],
+            "sesiones": {},  # no se calcula asistencia (ver docstring), pero sí hay votos puntuales
+            "votos": votos_dict,
+            "proyectos": proyectos,
         })
 
-    return legisladores, [], []
+    return legisladores, [], votaciones
 
 
 def build_senado(conn):
