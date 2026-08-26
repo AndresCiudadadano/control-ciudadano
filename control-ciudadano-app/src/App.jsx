@@ -302,7 +302,8 @@ export default function ControlCiudadano() {
             {PROVINCES.filter((p) => p.id !== "caba").map((prov) => {
               const shape = PROVINCE_SHAPES[prov.id];
               if (!shape) return null;
-              const leg = LEGISLATORS.find((l) => l.provinciaId === prov.id);
+              const leg = LEGISLATORS.find((l) => l.provinciaId === prov.id && l.asistencia != null)
+                || LEGISLATORS.find((l) => l.provinciaId === prov.id);
               const isSelected = selectedProvince === prov.id;
               const fillColor = leg ? asistenciaColor(leg.asistencia) : TOKENS.line;
               return (
@@ -325,7 +326,8 @@ export default function ControlCiudadano() {
             })}
             {/* CABA no viene delimitada en el mapa fuente: se marca como punto sobre Buenos Aires */}
             {(() => {
-              const leg = LEGISLATORS.find((l) => l.provinciaId === "caba");
+              const leg = LEGISLATORS.find((l) => l.provinciaId === "caba" && l.asistencia != null)
+                || LEGISLATORS.find((l) => l.provinciaId === "caba");
               const isSelected = selectedProvince === "caba";
               return (
                 <circle
