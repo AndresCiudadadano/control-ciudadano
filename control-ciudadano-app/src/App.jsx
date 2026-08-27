@@ -431,8 +431,17 @@ export default function ControlCiudadano() {
                   </p>
                 ) : (
                 <>
+                {leg.camara === "Diputados" && (
+                  <p style={{ ...styles.emptyText, marginBottom: 10 }}>
+                    Acumulado del período de mandato vigente, según votaciones.hcdn.gob.ar (no hay desglose sesión por sesión disponible en esta fuente).
+                  </p>
+                )}
                 <div style={styles.attendanceSummary}>
-                  <SummaryStat value={sesionesDeLegislador.length} label="Sesiones" color={TOKENS.textPrimary} />
+                  <SummaryStat
+                    value={leg.camara === "Diputados" ? (leg.totalVotosPeriodoActual ?? "—") : sesionesDeLegislador.length}
+                    label={leg.camara === "Diputados" ? "Votaciones" : "Sesiones"}
+                    color={TOKENS.textPrimary}
+                  />
                   <SummaryStat value={leg.presentesCount} label="Presente" color={TOKENS.afirmativo} />
                   <SummaryStat value={leg.ausentesCount} label="Ausente" color={TOKENS.negativo} />
                 </div>
@@ -461,7 +470,7 @@ export default function ControlCiudadano() {
                 </div>
                 {leg.camara === "Diputados" && votacionesDeLegislador.length > 0 && (
                   <p style={{ ...styles.emptyText, marginBottom: 10 }}>
-                    La fuente disponible solo cubre sesiones de 2011 a 2018 — estos votos pueden ser de un período de mandato anterior de este legislador, no necesariamente del actual.
+                    Estos votos puntuales vienen de una fuente distinta a la asistencia de arriba, que solo cubre sesiones de 2011 a 2018 — pueden ser de un período de mandato anterior de este legislador, no necesariamente del actual.
                   </p>
                 )}
                 <div style={styles.votesList}>
