@@ -188,6 +188,22 @@ def build_diputados(conn):
         nombre_norm = normalize_nombre(leg.get("nombre"))
         proyectos = proyectos_por_autor_norm.get(nombre_norm, [])
 
+        def _limpio(valor):
+            """None si es NaN/None; si no, el valor tal cual (convertido a int si aplica)."""
+            if valor is None:
+                return None
+            try:
+                if valor != valor:  # NaN != NaN es True
+                    return None
+            except TypeError:
+                pass
+            try:
+                return int(valor)
+            except (TypeError, ValueError):
+                return valor
+
+        asistencia_actual = _limpio(leg.get("asistencia_actual"))
+
         legisladores.append({
             "id": f"dip-{persona_id}",
             "nombre": leg.get("nombre"),
@@ -197,10 +213,11 @@ def build_diputados(conn):
             "mandatoPeriodo": leg.get("mandato_periodo"),
             "provinciaId": leg.get("provincia_slug") or "desconocida",
             "bloque": leg.get("bloque_actual"),
-            "asistencia": None,
-            "presentesCount": None,
-            "ausentesCount": None,
-            "sesiones": {},  # no se calcula asistencia (ver docstring), pero sí hay votos puntuales
+            "asistencia": asistencia_actual,
+            "presentesCount": _limpio(leg.get("presentes_actual")),
+            "ausentesCount": _limpio(leg.get("ausentes_actual")),
+            "totalVotosPeriodoActual": _limpio(leg.get("total_votos_actual")),
+            "sesiones": {},  # HCDN no expone las sesiones individuales del período actual, solo el acumulado
             "votos": votos_dict,
             "proyectos": proyectos,
         })

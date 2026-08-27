@@ -16,10 +16,13 @@ reales que trajo cada dataset y ajustar el mapeo de columnas más abajo.
 """
 
 import argparse
+import io
 import json
+import re
 import sqlite3
 import sys
 import time
+import unicodedata
 from pathlib import Path
 
 import pandas as pd
@@ -185,8 +188,107 @@ def slugify_provincia(valor: str) -> str:
     return PROVINCIA_SLUG.get(norm, norm.replace(" ", ""))
 
 
+def _norm_nombre(v):
+    """Normaliza un nombre: sin acentos, may\u00fascula, solo letras y espacios."""
+    if not isinstance(v, str):
+        return ""
+    n = unicodedata.normalize("NFKD", v).encode("ascii", "ignore").decode()
+    n = re.sub(r"[^A-Za-z ]", " ", n.upper())
+    return " ".join(n.split())
+
+
+def normalize_nombre_apellido_flexible(v):
+    """Igual que _norm_nombre, pero ordena las palabras alfab\u00e9ticamente para
+    que el cruce no dependa de si el nombre viene como 'Apellido Nombre' o
+    'Nombre Apellido' (ej. la tabla de asistencia actual usa 'APELLIDO, Nombre',
+    mientras el listado oficial separa Apellido y Nombre en columnas propias)."""
+    return " ".join(sorted(_norm_nombre(v).split()))
+
+
+ASISTENCIA_ACTUAL_URL = "https://votaciones.hcdn.gob.ar/estadisticas/home"
+
+
+def fetch_asistencia_actual(debug: bool = False) -> pd.DataFrame:
+    """Trae la tabla de asistencia del PERÍODO ACTUAL desde el sitio nuevo de
+    votaciones electrónicas de HCDN (no el portal viejo de datos abiertos,
+    que solo llega a 2018). Esta página ya trae, para cada diputado, el
+    total acumulado de votos afirmativos/negativos/abstenciones/ausencias
+    del período vigente — no hace falta scrapear acta por acta."""
+    cache_file = RAW_DIR / "asistencia_actual.csv"
+    if cache_file.exists():
+        print("[asistencia_actual] usando caché en", cache_file)
+        return pd.read_csv(cache_file)
+
+    print(f"[asistencia_actual] descargando desde {ASISTENCIA_ACTUAL_URL} ...")
+    resp = requests.get(ASISTENCIA_ACTUAL_URL, timeout=60, headers={
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                      "(KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+    })
+    resp.raise_for_status()
+
+    # Diagnóstico: guardamos el HTML crudo para poder inspeccionarlo si algo falla.
+    raw_file = RAW_DIR / "asistencia_actual_raw.html"
+    with open(raw_file, "w", encoding="utf-8") as f:
+        f.write(resp.text)
+    print(f"[asistencia_actual] HTML crudo guardado en {raw_file} ({len(resp.text)} caracteres, "
+          f"contiene '<table': {'<table' in resp.text.lower()})")
+
+    tablas = pd.read_html(io.StringIO(resp.text))
+    if debug:
+        print(f"[asistencia_actual] se encontraron {len(tablas)} tablas en la página")
+        for i, t in enumerate(tablas):
+            print(f"  tabla {i}: columnas={list(t.columns)}, filas={len(t)}")
+
+    # Nos quedamos con la tabla más grande (la de todos los diputados)
+    df = max(tablas, key=len)
+    df.columns = [str(c).strip().upper() for c in df.columns]
+    if debug:
+        print("[asistencia_actual] columnas elegidas:", list(df.columns))
+        print(df.head(3))
+
+    df.to_csv(cache_file, index=False)
+    print(f"[asistencia_actual] guardado {len(df)} filas en {cache_file}")
+    return df
+
+
 def build_database(dfs: dict, debug: bool = False):
     conn = sqlite3.connect(DB_PATH)
+
+    # --- Asistencia del período ACTUAL (fuente nueva, no la vieja de 2011-2018) ---
+    asistencia_actual_por_nombre = {}
+    try:
+        df_asis = fetch_asistencia_actual(debug=debug)
+        col_dip = find_col(df_asis, "diputado")
+        col_af = find_col(df_asis, "afirm")
+        col_ne = find_col(df_asis, "neg")
+        col_ab = find_col(df_asis, "abst")
+        col_au = find_col(df_asis, "aus")
+        if col_dip and col_af and col_ne and col_au:
+            for _, fila_a in df_asis.iterrows():
+                def _num(x):
+                    try:
+                        return int(str(x).replace("-", "0").strip() or 0)
+                    except ValueError:
+                        return 0
+                af = _num(fila_a[col_af])
+                ne = _num(fila_a[col_ne])
+                ab = _num(fila_a[col_ab]) if col_ab else 0
+                au = _num(fila_a[col_au])
+                total = af + ne + ab + au
+                clave = normalize_nombre_apellido_flexible(fila_a[col_dip])
+                if clave and total:
+                    asistencia_actual_por_nombre[clave] = {
+                        "asistencia": round(100 * (af + ne + ab) / total),
+                        "presentes": af + ne + ab,
+                        "ausentes": au,
+                        "total": total,
+                    }
+            print(f"[asistencia_actual] {len(asistencia_actual_por_nombre)} diputados con asistencia del período actual calculada")
+        else:
+            print("AVISO: no se encontraron las columnas esperadas en la tabla de asistencia actual "
+                  "(columnas reales:", list(df_asis.columns), ") — la asistencia va a quedar sin datos.")
+    except Exception as e:
+        print(f"AVISO: no se pudo traer la asistencia del período actual ({e}) — sigue sin ese dato.")
 
     # --- legisladores ---
     df_leg = dfs["legisladores"]
@@ -208,14 +310,6 @@ def build_database(dfs: dict, debug: bool = False):
     # legisladores a partir de votos_detalle (que sí trae persona_id en cada
     # voto) y se enriquece con fecha de mandato del listado oficial cruzando
     # por nombre normalizado (best-effort).
-    import re as _re
-    import unicodedata as _ud
-    def _norm_nombre(v):
-        if not isinstance(v, str):
-            return ""
-        n = _ud.normalize("NFKD", v).encode("ascii", "ignore").decode()
-        n = _re.sub(r"[^A-Za-z ]", " ", n.upper())
-        return " ".join(n.split())
 
     mandato_por_nombre = {}
     if col_apellido and col_nombre:
@@ -300,6 +394,7 @@ def build_database(dfs: dict, debug: bool = False):
     filas_leg = []
     sin_votos_matcheados = 0
     nombres_sin_match_reales = []  # rastreado durante el bucle, no reconstruido después
+    sin_asistencia_actual = 0
     for _, fila in df_leg.iterrows():
         nombre_completo = f"{fila[col_apellido]} {fila[col_nombre]}" if col_apellido and col_nombre else fila.get(col_nombre)
         clave = _norm_nombre(nombre_completo)
@@ -318,6 +413,12 @@ def build_database(dfs: dict, debug: bool = False):
             persona_id = "nom:" + clave
             sin_votos_matcheados += 1
             nombres_sin_match_reales.append(nombre_completo)
+
+        clave_flexible = normalize_nombre_apellido_flexible(nombre_completo)
+        asistencia = asistencia_actual_por_nombre.get(clave_flexible)
+        if not asistencia:
+            sin_asistencia_actual += 1
+
         filas_leg.append({
             "persona_id": persona_id,
             "nombre": nombre_completo,
@@ -328,12 +429,19 @@ def build_database(dfs: dict, debug: bool = False):
             "mandato_periodo": extra.get("mandato"),  # ej. "2025-2029"
             "mandato_inicio": extra.get("fecha_inicio"),
             "mandato_fin": None,
+            "asistencia_actual": asistencia.get("asistencia") if asistencia else None,
+            "presentes_actual": asistencia.get("presentes") if asistencia else None,
+            "ausentes_actual": asistencia.get("ausentes") if asistencia else None,
+            "total_votos_actual": asistencia.get("total") if asistencia else None,
         })
+    print(f"[asistencia_actual] {len(filas_leg) - sin_asistencia_actual} de {len(filas_leg)} diputados "
+          f"con asistencia del período actual matcheada")
     out_leg = pd.DataFrame(filas_leg)
     if out_leg.empty:
         out_leg = pd.DataFrame(columns=["persona_id", "nombre", "camara", "provincia_raw",
                                          "provincia_slug", "bloque_actual", "mandato_periodo",
-                                         "mandato_inicio", "mandato_fin"])
+                                         "mandato_inicio", "mandato_fin", "asistencia_actual",
+                                         "presentes_actual", "ausentes_actual", "total_votos_actual"])
     out_leg.to_sql("legisladores", conn, if_exists="replace", index=False)
     print(f"legisladores: {len(out_leg)} filas (del listado OFICIAL de composición actual de la Cámara; "
           f"{sin_votos_matcheados} de ellos no matchearon con ningún voto histórico por nombre)")
