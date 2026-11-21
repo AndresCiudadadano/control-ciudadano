@@ -23007,7 +23007,7 @@
       "bloque": "UCR - Unión Cívica Radical",
       "asistencia": 88,
       "presentesCount": 314,
-      "ausentesCount": 41,
+      "ausentesCount": 44,
       "sesiones": {
         "sen-2444": "presente",
         "sen-2434": "presente",
@@ -23363,7 +23363,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -23720,7 +23723,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "proyectos": []
     },
@@ -23734,7 +23740,7 @@
       "provinciaId": "sanluis",
       "bloque": "La Libertad Avanza",
       "asistencia": 96,
-      "presentesCount": 341,
+      "presentesCount": 344,
       "ausentesCount": 14,
       "sesiones": {
         "sen-2444": "presente",
@@ -24091,7 +24097,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -24448,7 +24457,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -24462,7 +24474,7 @@
       "provinciaId": "entrerios",
       "bloque": "La Libertad Avanza",
       "asistencia": 100,
-      "presentesCount": 195,
+      "presentesCount": 198,
       "ausentesCount": 0,
       "sesiones": {
         "sen-2605": "presente",
@@ -24659,7 +24671,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2605": "afirmativo",
@@ -24856,7 +24871,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -24885,9 +24903,9 @@
       "mandatoPeriodo": "2021-2027",
       "provinciaId": "catamarca",
       "bloque": "Convicción Federal",
-      "asistencia": 97,
+      "asistencia": 96,
       "presentesCount": 345,
-      "ausentesCount": 10,
+      "ausentesCount": 13,
       "sesiones": {
         "sen-2444": "presente",
         "sen-2434": "presente",
@@ -25243,7 +25261,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "ausente",
-        "sen-2885": "ausente"
+        "sen-2885": "ausente",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "votos": {
         "sen-2444": "abstencion",
@@ -25600,7 +25621,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "ausente",
-        "sen-2885": "ausente"
+        "sen-2885": "ausente",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "proyectos": []
     },
@@ -25614,7 +25638,7 @@
       "provinciaId": "misiones",
       "bloque": "Movimiento por Misiones",
       "asistencia": 97,
-      "presentesCount": 344,
+      "presentesCount": 347,
       "ausentesCount": 11,
       "sesiones": {
         "sen-2444": "presente",
@@ -25971,7 +25995,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -26328,7 +26355,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -26342,7 +26372,7 @@
       "provinciaId": "sanluis",
       "bloque": "La Libertad Avanza",
       "asistencia": 95,
-      "presentesCount": 336,
+      "presentesCount": 339,
       "ausentesCount": 19,
       "sesiones": {
         "sen-2444": "presente",
@@ -26699,7 +26729,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -27056,7 +27089,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -27070,7 +27106,7 @@
       "provinciaId": "jujuy",
       "bloque": "La Libertad Avanza",
       "asistencia": 96,
-      "presentesCount": 340,
+      "presentesCount": 343,
       "ausentesCount": 15,
       "sesiones": {
         "sen-2444": "presente",
@@ -27427,7 +27463,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -27784,7 +27823,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -27797,9 +27839,9 @@
       "mandatoPeriodo": "2021-2027",
       "provinciaId": "tucuman",
       "bloque": "Independencia",
-      "asistencia": 90,
+      "asistencia": 89,
       "presentesCount": 320,
-      "ausentesCount": 35,
+      "ausentesCount": 38,
       "sesiones": {
         "sen-2444": "presente",
         "sen-2434": "presente",
@@ -28155,7 +28197,10 @@
         "sen-2882": "ausente",
         "sen-2883": "ausente",
         "sen-2884": "ausente",
-        "sen-2885": "ausente"
+        "sen-2885": "ausente",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -28512,7 +28557,10 @@
         "sen-2882": "ausente",
         "sen-2883": "ausente",
         "sen-2884": "ausente",
-        "sen-2885": "ausente"
+        "sen-2885": "ausente",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "proyectos": []
     },
@@ -28526,7 +28574,7 @@
       "provinciaId": "entrerios",
       "bloque": "Justicialista",
       "asistencia": 82,
-      "presentesCount": 159,
+      "presentesCount": 162,
       "ausentesCount": 36,
       "sesiones": {
         "sen-2605": "presente",
@@ -28723,7 +28771,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2605": "negativo",
@@ -28920,7 +28971,10 @@
         "sen-2882": "afirmativo",
         "sen-2883": "negativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "negativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -28934,7 +28988,7 @@
       "provinciaId": "jujuy",
       "bloque": "La Libertad Avanza",
       "asistencia": 94,
-      "presentesCount": 335,
+      "presentesCount": 338,
       "ausentesCount": 20,
       "sesiones": {
         "sen-2444": "presente",
@@ -29291,7 +29345,10 @@
         "sen-2882": "presente",
         "sen-2883": "ausente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -29648,7 +29705,10 @@
         "sen-2882": "afirmativo",
         "sen-2883": "ausente",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "negativo"
       },
       "proyectos": []
     },
@@ -29662,7 +29722,7 @@
       "provinciaId": "entrerios",
       "bloque": "La Libertad Avanza",
       "asistencia": 96,
-      "presentesCount": 188,
+      "presentesCount": 191,
       "ausentesCount": 7,
       "sesiones": {
         "sen-2605": "presente",
@@ -29859,7 +29919,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "ausente"
+        "sen-2885": "ausente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2605": "afirmativo",
@@ -30056,7 +30119,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "ausente"
+        "sen-2885": "ausente",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -30069,9 +30135,9 @@
       "mandatoPeriodo": "2021-2027",
       "provinciaId": "lapampa",
       "bloque": "Justicialista",
-      "asistencia": 91,
+      "asistencia": 90,
       "presentesCount": 322,
-      "ausentesCount": 33,
+      "ausentesCount": 36,
       "sesiones": {
         "sen-2444": "presente",
         "sen-2434": "presente",
@@ -30427,7 +30493,10 @@
         "sen-2882": "ausente",
         "sen-2883": "ausente",
         "sen-2884": "ausente",
-        "sen-2885": "ausente"
+        "sen-2885": "ausente",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "votos": {
         "sen-2444": "abstencion",
@@ -30784,7 +30853,10 @@
         "sen-2882": "ausente",
         "sen-2883": "ausente",
         "sen-2884": "ausente",
-        "sen-2885": "ausente"
+        "sen-2885": "ausente",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "proyectos": []
     },
@@ -30798,7 +30870,7 @@
       "provinciaId": "caba",
       "bloque": "La Libertad Avanza",
       "asistencia": 100,
-      "presentesCount": 195,
+      "presentesCount": 198,
       "ausentesCount": 0,
       "sesiones": {
         "sen-2605": "presente",
@@ -30995,7 +31067,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2605": "afirmativo",
@@ -31192,7 +31267,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -31206,7 +31284,7 @@
       "provinciaId": "chaco",
       "bloque": "Justicialista",
       "asistencia": 99,
-      "presentesCount": 194,
+      "presentesCount": 197,
       "ausentesCount": 1,
       "sesiones": {
         "sen-2605": "presente",
@@ -31403,7 +31481,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2605": "negativo",
@@ -31600,7 +31681,10 @@
         "sen-2882": "afirmativo",
         "sen-2883": "negativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "negativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -31613,9 +31697,9 @@
       "mandatoPeriodo": "2023-2029",
       "provinciaId": "santacruz",
       "bloque": "Movere Santa Cruz",
-      "asistencia": 89,
+      "asistencia": 88,
       "presentesCount": 316,
-      "ausentesCount": 39,
+      "ausentesCount": 42,
       "sesiones": {
         "sen-2444": "presente",
         "sen-2434": "presente",
@@ -31971,7 +32055,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -32328,7 +32415,10 @@
         "sen-2882": "afirmativo",
         "sen-2883": "negativo",
         "sen-2884": "negativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "proyectos": []
     },
@@ -32342,7 +32432,7 @@
       "provinciaId": "neuquen",
       "bloque": "La Libertad Avanza",
       "asistencia": 99,
-      "presentesCount": 194,
+      "presentesCount": 197,
       "ausentesCount": 1,
       "sesiones": {
         "sen-2605": "presente",
@@ -32539,7 +32629,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2605": "afirmativo",
@@ -32736,7 +32829,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -32766,7 +32862,7 @@
       "provinciaId": "catamarca",
       "bloque": "Justicialista",
       "asistencia": 90,
-      "presentesCount": 318,
+      "presentesCount": 321,
       "ausentesCount": 37,
       "sesiones": {
         "sen-2444": "presente",
@@ -33123,7 +33219,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "abstencion",
@@ -33480,7 +33579,10 @@
         "sen-2882": "afirmativo",
         "sen-2883": "negativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "negativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -33494,8 +33596,8 @@
       "provinciaId": "neuquen",
       "bloque": "La Neuquinidad",
       "asistencia": 95,
-      "presentesCount": 186,
-      "ausentesCount": 9,
+      "presentesCount": 188,
+      "ausentesCount": 10,
       "sesiones": {
         "sen-2605": "presente",
         "sen-2606": "presente",
@@ -33691,7 +33793,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "ausente"
       },
       "votos": {
         "sen-2605": "afirmativo",
@@ -33888,7 +33993,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "ausente"
       },
       "proyectos": []
     },
@@ -33918,7 +34026,7 @@
       "provinciaId": "chubut",
       "bloque": "Frente Pro",
       "asistencia": 92,
-      "presentesCount": 325,
+      "presentesCount": 328,
       "ausentesCount": 30,
       "sesiones": {
         "sen-2444": "presente",
@@ -34275,7 +34383,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -34632,7 +34743,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -34646,7 +34760,7 @@
       "provinciaId": "buenosaires",
       "bloque": "Justicialista",
       "asistencia": 91,
-      "presentesCount": 322,
+      "presentesCount": 325,
       "ausentesCount": 33,
       "sesiones": {
         "sen-2444": "presente",
@@ -35003,7 +35117,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "abstencion",
@@ -35360,7 +35477,10 @@
         "sen-2882": "afirmativo",
         "sen-2883": "negativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "negativo",
+        "sen-2889": "negativo"
       },
       "proyectos": []
     },
@@ -35373,8 +35493,8 @@
       "mandatoPeriodo": "2023-2029",
       "provinciaId": "buenosaires",
       "bloque": "Justicialista",
-      "asistencia": 90,
-      "presentesCount": 321,
+      "asistencia": 91,
+      "presentesCount": 324,
       "ausentesCount": 34,
       "sesiones": {
         "sen-2444": "presente",
@@ -35731,7 +35851,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "abstencion",
@@ -36088,7 +36211,10 @@
         "sen-2882": "afirmativo",
         "sen-2883": "negativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "negativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -36101,8 +36227,8 @@
       "mandatoPeriodo": "2021-2027",
       "provinciaId": "corrientes",
       "bloque": "Provincias Unidas",
-      "asistencia": 95,
-      "presentesCount": 339,
+      "asistencia": 96,
+      "presentesCount": 342,
       "ausentesCount": 16,
       "sesiones": {
         "sen-2444": "presente",
@@ -36459,7 +36585,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -36816,7 +36945,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -36829,9 +36961,9 @@
       "mandatoPeriodo": "2021-2027",
       "provinciaId": "catamarca",
       "bloque": "UCR - Unión Cívica Radical",
-      "asistencia": 90,
+      "asistencia": 89,
       "presentesCount": 320,
-      "ausentesCount": 35,
+      "ausentesCount": 38,
       "sesiones": {
         "sen-2444": "presente",
         "sen-2434": "presente",
@@ -37187,7 +37319,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -37544,7 +37679,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "proyectos": []
     },
@@ -37557,9 +37695,9 @@
       "mandatoPeriodo": "2021-2027",
       "provinciaId": "mendoza",
       "bloque": "Justicialista",
-      "asistencia": 68,
+      "asistencia": 67,
       "presentesCount": 241,
-      "ausentesCount": 114,
+      "ausentesCount": 117,
       "sesiones": {
         "sen-2444": "presente",
         "sen-2434": "presente",
@@ -37915,7 +38053,10 @@
         "sen-2882": "ausente",
         "sen-2883": "ausente",
         "sen-2884": "ausente",
-        "sen-2885": "ausente"
+        "sen-2885": "ausente",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "votos": {
         "sen-2444": "abstencion",
@@ -38272,7 +38413,10 @@
         "sen-2882": "ausente",
         "sen-2883": "ausente",
         "sen-2884": "ausente",
-        "sen-2885": "ausente"
+        "sen-2885": "ausente",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "proyectos": []
     },
@@ -38286,7 +38430,7 @@
       "provinciaId": "rionegro",
       "bloque": "La Libertad Avanza",
       "asistencia": 100,
-      "presentesCount": 195,
+      "presentesCount": 198,
       "ausentesCount": 0,
       "sesiones": {
         "sen-2605": "presente",
@@ -38483,7 +38627,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2605": "afirmativo",
@@ -38680,7 +38827,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -38693,9 +38843,9 @@
       "mandatoPeriodo": "2023-2029",
       "provinciaId": "santacruz",
       "bloque": "Movere Santa Cruz",
-      "asistencia": 92,
+      "asistencia": 91,
       "presentesCount": 326,
-      "ausentesCount": 29,
+      "ausentesCount": 32,
       "sesiones": {
         "sen-2444": "presente",
         "sen-2434": "presente",
@@ -39051,7 +39201,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -39408,7 +39561,10 @@
         "sen-2882": "afirmativo",
         "sen-2883": "negativo",
         "sen-2884": "negativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "proyectos": []
     },
@@ -39422,7 +39578,7 @@
       "provinciaId": "santafe",
       "bloque": "UCR - Unión Cívica Radical",
       "asistencia": 97,
-      "presentesCount": 346,
+      "presentesCount": 349,
       "ausentesCount": 9,
       "sesiones": {
         "sen-2444": "presente",
@@ -39779,7 +39935,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -40136,7 +40295,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -40150,8 +40312,8 @@
       "provinciaId": "sanjuan",
       "bloque": "Justicialista",
       "asistencia": 97,
-      "presentesCount": 344,
-      "ausentesCount": 11,
+      "presentesCount": 346,
+      "ausentesCount": 12,
       "sesiones": {
         "sen-2444": "presente",
         "sen-2434": "presente",
@@ -40507,7 +40669,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "ausente"
       },
       "votos": {
         "sen-2444": "abstencion",
@@ -40864,7 +41029,10 @@
         "sen-2882": "afirmativo",
         "sen-2883": "negativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "negativo",
+        "sen-2889": "ausente"
       },
       "proyectos": []
     },
@@ -40878,7 +41046,7 @@
       "provinciaId": "chaco",
       "bloque": "La Libertad Avanza",
       "asistencia": 99,
-      "presentesCount": 194,
+      "presentesCount": 197,
       "ausentesCount": 1,
       "sesiones": {
         "sen-2605": "presente",
@@ -41075,7 +41243,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "ausente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2605": "afirmativo",
@@ -41272,7 +41443,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "ausente",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -41286,7 +41460,7 @@
       "provinciaId": "misiones",
       "bloque": "Frente Pro",
       "asistencia": 94,
-      "presentesCount": 334,
+      "presentesCount": 337,
       "ausentesCount": 21,
       "sesiones": {
         "sen-2444": "presente",
@@ -41643,7 +41817,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -42000,7 +42177,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -42014,7 +42194,7 @@
       "provinciaId": "formosa",
       "bloque": "Justicialista",
       "asistencia": 98,
-      "presentesCount": 348,
+      "presentesCount": 351,
       "ausentesCount": 7,
       "sesiones": {
         "sen-2444": "presente",
@@ -42371,7 +42551,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "abstencion",
@@ -42728,7 +42911,10 @@
         "sen-2882": "afirmativo",
         "sen-2883": "negativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "negativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -42742,7 +42928,7 @@
       "provinciaId": "salta",
       "bloque": "La Libertad Avanza",
       "asistencia": 98,
-      "presentesCount": 191,
+      "presentesCount": 194,
       "ausentesCount": 4,
       "sesiones": {
         "sen-2605": "presente",
@@ -42939,7 +43125,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2605": "afirmativo",
@@ -43136,7 +43325,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "negativo"
       },
       "proyectos": []
     },
@@ -43150,7 +43342,7 @@
       "provinciaId": "lapampa",
       "bloque": "Frente Pro",
       "asistencia": 97,
-      "presentesCount": 345,
+      "presentesCount": 348,
       "ausentesCount": 10,
       "sesiones": {
         "sen-2444": "presente",
@@ -43507,7 +43699,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -43864,7 +44059,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -43877,9 +44075,9 @@
       "mandatoPeriodo": "2021-2027",
       "provinciaId": "cordoba",
       "bloque": "La Libertad Avanza",
-      "asistencia": 88,
+      "asistencia": 87,
       "presentesCount": 313,
-      "ausentesCount": 42,
+      "ausentesCount": 45,
       "sesiones": {
         "sen-2444": "presente",
         "sen-2434": "ausente",
@@ -44235,7 +44433,10 @@
         "sen-2882": "ausente",
         "sen-2883": "ausente",
         "sen-2884": "ausente",
-        "sen-2885": "ausente"
+        "sen-2885": "ausente",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -44592,7 +44793,10 @@
         "sen-2882": "ausente",
         "sen-2883": "ausente",
         "sen-2884": "ausente",
-        "sen-2885": "ausente"
+        "sen-2885": "ausente",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "proyectos": []
     },
@@ -44606,7 +44810,7 @@
       "provinciaId": "mendoza",
       "bloque": "UCR - Unión Cívica Radical",
       "asistencia": 92,
-      "presentesCount": 327,
+      "presentesCount": 330,
       "ausentesCount": 28,
       "sesiones": {
         "sen-2444": "presente",
@@ -44963,7 +45167,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -45320,7 +45527,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -45334,7 +45544,7 @@
       "provinciaId": "santacruz",
       "bloque": "Justicialista",
       "asistencia": 97,
-      "presentesCount": 345,
+      "presentesCount": 348,
       "ausentesCount": 10,
       "sesiones": {
         "sen-2444": "presente",
@@ -45691,7 +45901,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "abstencion",
@@ -46048,7 +46261,10 @@
         "sen-2882": "afirmativo",
         "sen-2883": "negativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "negativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -46062,7 +46278,7 @@
       "provinciaId": "lapampa",
       "bloque": "UCR - Unión Cívica Radical",
       "asistencia": 91,
-      "presentesCount": 323,
+      "presentesCount": 326,
       "ausentesCount": 32,
       "sesiones": {
         "sen-2444": "presente",
@@ -46419,7 +46635,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -46776,7 +46995,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -46790,7 +47012,7 @@
       "provinciaId": "santafe",
       "bloque": "Justicialista",
       "asistencia": 82,
-      "presentesCount": 292,
+      "presentesCount": 295,
       "ausentesCount": 63,
       "sesiones": {
         "sen-2444": "presente",
@@ -47147,7 +47369,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "ausente"
+        "sen-2885": "ausente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "abstencion",
@@ -47504,7 +47729,10 @@
         "sen-2882": "afirmativo",
         "sen-2883": "negativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "ausente"
+        "sen-2885": "ausente",
+        "sen-2886": "afirmativo",
+        "sen-2888": "negativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -47517,9 +47745,9 @@
       "mandatoPeriodo": "2021-2027",
       "provinciaId": "chubut",
       "bloque": "Justicialista",
-      "asistencia": 92,
+      "asistencia": 91,
       "presentesCount": 327,
-      "ausentesCount": 28,
+      "ausentesCount": 31,
       "sesiones": {
         "sen-2444": "presente",
         "sen-2434": "presente",
@@ -47875,7 +48103,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "ausente",
-        "sen-2885": "ausente"
+        "sen-2885": "ausente",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "votos": {
         "sen-2444": "abstencion",
@@ -48232,7 +48463,10 @@
         "sen-2882": "afirmativo",
         "sen-2883": "negativo",
         "sen-2884": "ausente",
-        "sen-2885": "ausente"
+        "sen-2885": "ausente",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "proyectos": []
     },
@@ -48246,7 +48480,7 @@
       "provinciaId": "santafe",
       "bloque": "UCR - Unión Cívica Radical",
       "asistencia": 95,
-      "presentesCount": 338,
+      "presentesCount": 341,
       "ausentesCount": 17,
       "sesiones": {
         "sen-2444": "presente",
@@ -48603,7 +48837,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -48960,7 +49197,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -48974,7 +49214,7 @@
       "provinciaId": "tierradelfuego,antartidaeislasdelatlanticosur",
       "bloque": "Justicialista",
       "asistencia": 97,
-      "presentesCount": 190,
+      "presentesCount": 193,
       "ausentesCount": 5,
       "sesiones": {
         "sen-2605": "presente",
@@ -49171,7 +49411,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2605": "negativo",
@@ -49368,7 +49611,10 @@
         "sen-2882": "afirmativo",
         "sen-2883": "negativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "negativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -49382,7 +49628,7 @@
       "provinciaId": "larioja",
       "bloque": "Justicialista",
       "asistencia": 87,
-      "presentesCount": 308,
+      "presentesCount": 311,
       "ausentesCount": 47,
       "sesiones": {
         "sen-2444": "presente",
@@ -49739,7 +49985,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "abstencion",
@@ -50096,7 +50345,10 @@
         "sen-2882": "afirmativo",
         "sen-2883": "negativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "negativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -50110,7 +50362,7 @@
       "provinciaId": "tucuman",
       "bloque": "Justicialista",
       "asistencia": 89,
-      "presentesCount": 315,
+      "presentesCount": 318,
       "ausentesCount": 40,
       "sesiones": {
         "sen-2444": "ausente",
@@ -50467,7 +50719,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "ausente",
@@ -50824,7 +51079,10 @@
         "sen-2882": "afirmativo",
         "sen-2883": "negativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "negativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -50838,7 +51096,7 @@
       "provinciaId": "rionegro",
       "bloque": "Justicialista",
       "asistencia": 97,
-      "presentesCount": 190,
+      "presentesCount": 193,
       "ausentesCount": 5,
       "sesiones": {
         "sen-2605": "presente",
@@ -51035,7 +51293,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2605": "negativo",
@@ -51232,7 +51493,10 @@
         "sen-2882": "afirmativo",
         "sen-2883": "negativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "negativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -51246,7 +51510,7 @@
       "provinciaId": "formosa",
       "bloque": "Justicialista",
       "asistencia": 97,
-      "presentesCount": 345,
+      "presentesCount": 348,
       "ausentesCount": 10,
       "sesiones": {
         "sen-2444": "presente",
@@ -51603,7 +51867,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "abstencion",
@@ -51960,7 +52227,10 @@
         "sen-2882": "afirmativo",
         "sen-2883": "negativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "negativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -51973,9 +52243,9 @@
       "mandatoPeriodo": "2021-2027",
       "provinciaId": "tucuman",
       "bloque": "Convicción Federal",
-      "asistencia": 94,
+      "asistencia": 93,
       "presentesCount": 332,
-      "ausentesCount": 23,
+      "ausentesCount": 26,
       "sesiones": {
         "sen-2444": "presente",
         "sen-2434": "presente",
@@ -52331,7 +52601,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "votos": {
         "sen-2444": "abstencion",
@@ -52688,7 +52961,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "proyectos": []
     },
@@ -52701,9 +52977,9 @@
       "mandatoPeriodo": "2023-2029",
       "provinciaId": "jujuy",
       "bloque": "Convicción Federal",
-      "asistencia": 95,
+      "asistencia": 94,
       "presentesCount": 338,
-      "ausentesCount": 17,
+      "ausentesCount": 20,
       "sesiones": {
         "sen-2444": "presente",
         "sen-2434": "presente",
@@ -53059,7 +53335,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "votos": {
         "sen-2444": "abstencion",
@@ -53416,7 +53695,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "proyectos": []
     },
@@ -53446,7 +53728,7 @@
       "provinciaId": "caba",
       "bloque": "La Libertad Avanza",
       "asistencia": 98,
-      "presentesCount": 191,
+      "presentesCount": 194,
       "ausentesCount": 4,
       "sesiones": {
         "sen-2605": "presente",
@@ -53643,7 +53925,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2605": "afirmativo",
@@ -53840,7 +54125,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -53853,8 +54141,8 @@
       "mandatoPeriodo": "2025-2031",
       "provinciaId": "santiago",
       "bloque": "Frente Cívico por Santiago",
-      "asistencia": 76,
-      "presentesCount": 149,
+      "asistencia": 77,
+      "presentesCount": 152,
       "ausentesCount": 46,
       "sesiones": {
         "sen-2605": "presente",
@@ -54051,7 +54339,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2605": "negativo",
@@ -54248,7 +54539,10 @@
         "sen-2882": "afirmativo",
         "sen-2883": "negativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "negativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -54262,7 +54556,7 @@
       "provinciaId": "neuquen",
       "bloque": "La Libertad Avanza",
       "asistencia": 100,
-      "presentesCount": 195,
+      "presentesCount": 198,
       "ausentesCount": 0,
       "sesiones": {
         "sen-2605": "presente",
@@ -54459,7 +54753,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2605": "afirmativo",
@@ -54656,7 +54953,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -54670,7 +54970,7 @@
       "provinciaId": "santiago",
       "bloque": "Justicialista",
       "asistencia": 95,
-      "presentesCount": 186,
+      "presentesCount": 189,
       "ausentesCount": 9,
       "sesiones": {
         "sen-2605": "presente",
@@ -54867,7 +55167,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2605": "negativo",
@@ -55064,7 +55367,10 @@
         "sen-2882": "afirmativo",
         "sen-2883": "negativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "negativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -55078,7 +55384,7 @@
       "provinciaId": "sanjuan",
       "bloque": "La Libertad Avanza",
       "asistencia": 96,
-      "presentesCount": 340,
+      "presentesCount": 343,
       "ausentesCount": 15,
       "sesiones": {
         "sen-2444": "presente",
@@ -55435,7 +55741,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -55792,7 +56101,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -55806,8 +56118,8 @@
       "provinciaId": "salta",
       "bloque": "La Libertad Avanza",
       "asistencia": 97,
-      "presentesCount": 190,
-      "ausentesCount": 5,
+      "presentesCount": 192,
+      "ausentesCount": 6,
       "sesiones": {
         "sen-2605": "presente",
         "sen-2606": "presente",
@@ -56003,7 +56315,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "ausente"
       },
       "votos": {
         "sen-2605": "afirmativo",
@@ -56200,7 +56515,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "ausente"
       },
       "proyectos": []
     },
@@ -56866,7 +57184,7 @@
       "provinciaId": "formosa",
       "bloque": "La Libertad Avanza",
       "asistencia": 93,
-      "presentesCount": 331,
+      "presentesCount": 334,
       "ausentesCount": 24,
       "sesiones": {
         "sen-2444": "presente",
@@ -57223,7 +57541,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -57580,7 +57901,10 @@
         "sen-2882": "afirmativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "negativo"
       },
       "proyectos": []
     },
@@ -57594,7 +57918,7 @@
       "provinciaId": "caba",
       "bloque": "Justicialista",
       "asistencia": 83,
-      "presentesCount": 161,
+      "presentesCount": 164,
       "ausentesCount": 34,
       "sesiones": {
         "sen-2605": "presente",
@@ -57791,7 +58115,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2605": "negativo",
@@ -57988,7 +58315,10 @@
         "sen-2882": "afirmativo",
         "sen-2883": "negativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "negativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -58002,7 +58332,7 @@
       "provinciaId": "larioja",
       "bloque": "Justicia Social Federal",
       "asistencia": 89,
-      "presentesCount": 315,
+      "presentesCount": 318,
       "ausentesCount": 40,
       "sesiones": {
         "sen-2444": "presente",
@@ -58359,7 +58689,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "abstencion",
@@ -58716,7 +59049,10 @@
         "sen-2882": "afirmativo",
         "sen-2883": "negativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "negativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -58730,7 +59066,7 @@
       "provinciaId": "misiones",
       "bloque": "Movimiento por Misiones",
       "asistencia": 97,
-      "presentesCount": 345,
+      "presentesCount": 348,
       "ausentesCount": 10,
       "sesiones": {
         "sen-2444": "presente",
@@ -59087,7 +59423,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -59444,7 +59783,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -59474,7 +59816,7 @@
       "provinciaId": "sanluis",
       "bloque": "Justicia Social Federal",
       "asistencia": 97,
-      "presentesCount": 346,
+      "presentesCount": 349,
       "ausentesCount": 9,
       "sesiones": {
         "sen-2444": "presente",
@@ -59831,7 +60173,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "abstencion",
@@ -60188,7 +60533,10 @@
         "sen-2882": "afirmativo",
         "sen-2883": "negativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "negativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -60218,7 +60566,7 @@
       "provinciaId": "chaco",
       "bloque": "UCR - Unión Cívica Radical",
       "asistencia": 100,
-      "presentesCount": 195,
+      "presentesCount": 198,
       "ausentesCount": 0,
       "sesiones": {
         "sen-2605": "presente",
@@ -60415,7 +60763,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2605": "afirmativo",
@@ -60612,7 +60963,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -60626,7 +60980,7 @@
       "provinciaId": "rionegro",
       "bloque": "Justicialista",
       "asistencia": 99,
-      "presentesCount": 193,
+      "presentesCount": 196,
       "ausentesCount": 2,
       "sesiones": {
         "sen-2605": "presente",
@@ -60823,7 +61177,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2605": "negativo",
@@ -61020,7 +61377,10 @@
         "sen-2882": "afirmativo",
         "sen-2883": "negativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "negativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -61034,7 +61394,7 @@
       "provinciaId": "mendoza",
       "bloque": "UCR - Unión Cívica Radical",
       "asistencia": 80,
-      "presentesCount": 284,
+      "presentesCount": 287,
       "ausentesCount": 71,
       "sesiones": {
         "sen-2444": "presente",
@@ -61391,7 +61751,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -61748,7 +62111,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -61762,7 +62128,7 @@
       "provinciaId": "chubut",
       "bloque": "Despierta Chubut",
       "asistencia": 85,
-      "presentesCount": 301,
+      "presentesCount": 304,
       "ausentesCount": 54,
       "sesiones": {
         "sen-2444": "presente",
@@ -62119,7 +62485,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -62476,7 +62845,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -62505,9 +62877,9 @@
       "mandatoPeriodo": "2023-2029",
       "provinciaId": "sanjuan",
       "bloque": "Justicialista",
-      "asistencia": 91,
+      "asistencia": 90,
       "presentesCount": 322,
-      "ausentesCount": 33,
+      "ausentesCount": 36,
       "sesiones": {
         "sen-2444": "presente",
         "sen-2434": "presente",
@@ -62863,7 +63235,10 @@
         "sen-2882": "ausente",
         "sen-2883": "ausente",
         "sen-2884": "ausente",
-        "sen-2885": "ausente"
+        "sen-2885": "ausente",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "votos": {
         "sen-2444": "abstencion",
@@ -63220,7 +63595,10 @@
         "sen-2882": "ausente",
         "sen-2883": "ausente",
         "sen-2884": "ausente",
-        "sen-2885": "ausente"
+        "sen-2885": "ausente",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "proyectos": []
     },
@@ -63233,9 +63611,9 @@
       "mandatoPeriodo": "2021-2027",
       "provinciaId": "corrientes",
       "bloque": "UCR - Unión Cívica Radical",
-      "asistencia": 98,
+      "asistencia": 97,
       "presentesCount": 349,
-      "ausentesCount": 6,
+      "ausentesCount": 9,
       "sesiones": {
         "sen-2444": "presente",
         "sen-2434": "presente",
@@ -63591,7 +63969,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -63948,7 +64329,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "proyectos": []
     },
@@ -63961,9 +64345,9 @@
       "mandatoPeriodo": "2021-2027",
       "provinciaId": "cordoba",
       "bloque": "Provincias Unidas",
-      "asistencia": 74,
+      "asistencia": 73,
       "presentesCount": 261,
-      "ausentesCount": 94,
+      "ausentesCount": 97,
       "sesiones": {
         "sen-2444": "presente",
         "sen-2434": "presente",
@@ -64319,7 +64703,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "ausente",
-        "sen-2885": "ausente"
+        "sen-2885": "ausente",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -64676,7 +65063,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "ausente",
-        "sen-2885": "ausente"
+        "sen-2885": "ausente",
+        "sen-2886": "ausente",
+        "sen-2888": "ausente",
+        "sen-2889": "ausente"
       },
       "proyectos": []
     },
@@ -64690,7 +65080,7 @@
       "provinciaId": "corrientes",
       "bloque": "UCR - Unión Cívica Radical",
       "asistencia": 99,
-      "presentesCount": 352,
+      "presentesCount": 355,
       "ausentesCount": 3,
       "sesiones": {
         "sen-2444": "presente",
@@ -65047,7 +65437,10 @@
         "sen-2882": "presente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2444": "afirmativo",
@@ -65404,7 +65797,10 @@
         "sen-2882": "negativo",
         "sen-2883": "afirmativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "afirmativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     },
@@ -65434,7 +65830,7 @@
       "provinciaId": "santiago",
       "bloque": "Frente Cívico por Santiago",
       "asistencia": 94,
-      "presentesCount": 184,
+      "presentesCount": 187,
       "ausentesCount": 11,
       "sesiones": {
         "sen-2605": "presente",
@@ -65631,7 +66027,10 @@
         "sen-2882": "ausente",
         "sen-2883": "presente",
         "sen-2884": "presente",
-        "sen-2885": "presente"
+        "sen-2885": "presente",
+        "sen-2886": "presente",
+        "sen-2888": "presente",
+        "sen-2889": "presente"
       },
       "votos": {
         "sen-2605": "negativo",
@@ -65828,7 +66227,10 @@
         "sen-2882": "ausente",
         "sen-2883": "negativo",
         "sen-2884": "afirmativo",
-        "sen-2885": "afirmativo"
+        "sen-2885": "afirmativo",
+        "sen-2886": "afirmativo",
+        "sen-2888": "negativo",
+        "sen-2889": "afirmativo"
       },
       "proyectos": []
     }
@@ -68382,6 +68784,21 @@
     {
       "id": "sen-2885",
       "fecha": "2026-11-20T04:09:30.000Z",
+      "tipo": null
+    },
+    {
+      "id": "sen-2886",
+      "fecha": "2026-11-20T04:28:08.000Z",
+      "tipo": null
+    },
+    {
+      "id": "sen-2888",
+      "fecha": "2026-11-20T04:29:31.000Z",
+      "tipo": null
+    },
+    {
+      "id": "sen-2889",
+      "fecha": "2026-11-20T04:33:42.000Z",
       "tipo": null
     }
   ],
@@ -75383,53 +75800,68 @@
     },
     {
       "id": "sen-2876",
-      "titulo": "S-1472/26-PL",
+      "titulo": "Moción de preferencia para el tratamiento con o sin dictamen del expediente S-1472/26. S-1472/26-PL",
       "fecha": "2026-11-19T17:31:27.000Z"
     },
     {
       "id": "sen-2877",
-      "titulo": "O.D. 407/2026",
+      "titulo": "Acuerdo para promover al grado inmediato superior al General de Brigada Sebastián Ignacio Ibáñez. O.D. 407/2026",
       "fecha": "2026-11-19T17:44:03.000Z"
     },
     {
       "id": "sen-2878",
-      "titulo": "O.D. 420/2026",
+      "titulo": "Proyecto de Ley en revisión de fortalecimiento, sostenibilidad y eficacia permanente del sistema de discapacidad. O.D. 420/2026",
       "fecha": "2026-11-19T22:39:31.000Z"
     },
     {
       "id": "sen-2879",
-      "titulo": "O.D. 408/2026",
+      "titulo": "Tratado de Cooperación en materia de Patentes. O.D. 408/2026",
       "fecha": "2026-11-20T00:04:39.000Z"
     },
     {
       "id": "sen-2880",
-      "titulo": "O.D. 424/2026",
+      "titulo": "Inviolabilidad de la Propiedad Privada. O.D. 424/2026",
       "fecha": "2026-11-20T00:59:08.000Z"
     },
     {
       "id": "sen-2881",
-      "titulo": "O.D. 419/2026",
+      "titulo": "Ley Joaquín. O.D. 419/2026",
       "fecha": "2026-11-20T01:21:28.000Z"
     },
     {
       "id": "sen-2882",
-      "titulo": "O.D. 425/2026",
+      "titulo": "Moción vuelta a comisión OD 425/26. O.D. 425/2026",
       "fecha": "2026-11-20T01:26:42.000Z"
     },
     {
       "id": "sen-2883",
-      "titulo": "O.D. 425/2026",
+      "titulo": "Régimen de Cabotaje, Marina Mercante y Admisión Temporaria. O.D. 425/2026",
       "fecha": "2026-11-20T03:29:24.000Z"
     },
     {
       "id": "sen-2884",
-      "titulo": "O.D. 421/2026",
+      "titulo": "Designación de integrantes del Comité Nacional para la Prevención de la Tortura. O.D. 421/2026",
       "fecha": "2026-11-20T03:51:17.000Z"
     },
     {
       "id": "sen-2885",
-      "titulo": "O.D. 418/2026",
+      "titulo": "Promoción de los Derechos de las niñas, niños y adolescentes. O.D. 418/2026",
       "fecha": "2026-11-20T04:09:30.000Z"
+    },
+    {
+      "id": "sen-2886",
+      "titulo": "Tratados Internacionales OD411/26, OD414/26, OD416/26 ( O.D. 411/2026 , O.D. 414/2026 , O.D. 416/2026",
+      "fecha": "2026-11-20T04:28:08.000Z"
+    },
+    {
+      "id": "sen-2888",
+      "titulo": "Tratados Internacionales OD410/26, OD412/26, OD415/26. ( O.D. 410/2026 , O.D. 412/2026 , O.D. 415/2026",
+      "fecha": "2026-11-20T04:29:31.000Z"
+    },
+    {
+      "id": "sen-2889",
+      "titulo": "Transferencias OD130/26, OD131/26, OD133/26. ( O.D. 130/2026 , O.D. 131/2026 , O.D. 133/2026",
+      "fecha": "2026-11-20T04:33:42.000Z"
     }
   ]
 }
